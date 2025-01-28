@@ -96,6 +96,7 @@
                     </view>
                     <connections>
                         <outlet property="dDay" destination="3NQ-mb-2Zf" id="r07-PN-EQe"/>
+                        <outlet property="slideVar" destination="3PH-Fl-dJn" id="qgX-8p-vu5"/>
                         <outlet property="subjectTitle" destination="RsI-gT-n2b" id="vO8-Xb-6lH"/>
                     </connections>
                 </viewController>
