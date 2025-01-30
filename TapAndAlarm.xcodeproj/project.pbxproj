@@ -13,6 +13,7 @@
 		A922A45D2D421E8B002BB4AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A922A45B2D421E8B002BB4AC /* Main.storyboard */; };
 		A922A45F2D421E8D002BB4AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A922A45E2D421E8D002BB4AC /* Assets.xcassets */; };
 		A922A4622D421E8D002BB4AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A922A4602D421E8D002BB4AC /* LaunchScreen.storyboard */; };
+		A922A46A2D4A1063002BB4AC /* SubjectTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A922A4692D4A1063002BB4AC /* SubjectTimePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A922A45E2D421E8D002BB4AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A922A4612D421E8D002BB4AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A922A4632D421E8D002BB4AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A922A4692D4A1063002BB4AC /* SubjectTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTimePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				A922A4552D421E8B002BB4AC /* AppDelegate.swift */,
 				A922A4572D421E8B002BB4AC /* SceneDelegate.swift */,
 				A922A4592D421E8B002BB4AC /* ViewController.swift */,
+				A922A4692D4A1063002BB4AC /* SubjectTimePicker.swift */,
 				A922A45B2D421E8B002BB4AC /* Main.storyboard */,
 				A922A45E2D421E8D002BB4AC /* Assets.xcassets */,
 				A922A4602D421E8D002BB4AC /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				A922A45A2D421E8B002BB4AC /* ViewController.swift in Sources */,
 				A922A4562D421E8B002BB4AC /* AppDelegate.swift in Sources */,
 				A922A4582D421E8B002BB4AC /* SceneDelegate.swift in Sources */,
+				A922A46A2D4A1063002BB4AC /* SubjectTimePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

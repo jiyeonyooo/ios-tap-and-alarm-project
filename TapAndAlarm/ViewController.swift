@@ -67,6 +67,8 @@ class ViewController: UIViewController {
             let yPosition = CGFloat(row) * (buttonHeight + buttonSpacing)
             button.frame = CGRect(x: xPosition, y: yPosition, width: buttonWidth, height: buttonHeight)
             
+            button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+            
             // 버튼을 부모 뷰에 추가
             containerView.addSubview(button)
         }
@@ -80,21 +82,24 @@ class ViewController: UIViewController {
         let referenceViewBottomY = slideVar.frame.origin.y + slideVar.frame.height
         containerView.center = CGPoint(x: view.frame.width / 2, y: referenceViewBottomY + containerHeight / 2 + 30)
         
+        
         // 컨테이너를 화면에 추가
         view.addSubview(containerView)
     }
 
         
-        @objc private func buttonTapped(_ sender: UIButton) {
-            // 버튼이 눌렸을 때 동작
-            guard let title = sender.configuration?.title else { return }
-            subjectTitle.text = "\(title)"
-            print("\(title) 버튼이 눌렸습니다!")
-        }
-    
-    
-
-
+    @objc private func buttonTapped(_ sender: UIButton) {
+        // 버튼이 눌렸을 때 동작
+        guard let title = sender.configuration?.title else { return }
+        guard let subtitle = sender.configuration?.subtitle else { return }
+        subjectTitle.text = "\(title) \(subtitle)영역"
+        print("\(title) 버튼이 눌렸습니다!")
+        
+        
+        let customButton = SubjectTimePicker(frame: CGRect(x: 55, y: 687, width: 90, height: 90), subjectTitle: "독서")
+                view.addSubview(customButton)
+        
+    }
 
 }
 
