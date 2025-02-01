@@ -9,18 +9,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var dDay: UILabel!
-    @IBOutlet weak var subjectTitle: UILabel!
+    @IBOutlet weak var dDay: UILabel!            //수능 디데이 체크
+    @IBOutlet weak var subjectTitle: UILabel!    //과목 선택 title
     
     @IBOutlet weak var slideVar: UIStackView!
-    private var buttons: [UIButton] = []
+    private var buttons: [UIButton] = [] //과목 선택 버튼
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let titles: [String] = ["국어", "수학", "영어", "탐구"]
         let subtitles: [String] = ["<1교시>", "<2교시>", "<3교시>", "<4교시>"]
-        let colors: [UIColor] = [UIColor.green1, UIColor.green2, UIColor.green3, UIColor.green4 ]
+        let colors: [UIColor] = [UIColor.green1, UIColor.green2, UIColor.green3, UIColor.green4]
         createButtonsInGrid(with: titles, subtitles: subtitles, colors: colors)
         
     }
@@ -86,6 +86,22 @@ class ViewController: UIViewController {
         // 컨테이너를 화면에 추가
         view.addSubview(containerView)
     }
+    
+    private func createSubTimeButton() {
+        let subjectTitles: [String] = ["독서", "문학", "선택"]
+        
+        // 버튼 크기와 간격 설정
+        let timeButtonWidth: CGFloat = 90
+        let timeButtonHeight: CGFloat = 90
+        let timeButtonSpacing: CGFloat = 100
+        
+        for (index, subtitle) in subjectTitles.enumerated() {
+            var subjectTimePickerButton = SubjectTimePicker(frame: CGRect(x: 55 + Int(timeButtonSpacing) * index, y: 687, width: 90, height: 90), subjectTitle: subtitle)
+            view.addSubview(subjectTimePickerButton)
+        }
+       
+        
+    }
 
         
     @objc private func buttonTapped(_ sender: UIButton) {
@@ -95,9 +111,7 @@ class ViewController: UIViewController {
         subjectTitle.text = "\(title) \(subtitle)영역"
         print("\(title) 버튼이 눌렸습니다!")
         
-        
-        let customButton = SubjectTimePicker(frame: CGRect(x: 55, y: 687, width: 90, height: 90), subjectTitle: "독서")
-                view.addSubview(customButton)
+        createSubTimeButton()
         
     }
 
