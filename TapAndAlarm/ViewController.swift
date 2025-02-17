@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         let buttonWidth: CGFloat = 150
         let buttonHeight: CGFloat = 90
         let buttonSpacing: CGFloat = 10
+        let bottomSpacing: CGFloat = 10;
         
         // 버튼 추가
         for (index, title) in titles.enumerated() {
@@ -75,31 +76,39 @@ class ViewController: UIViewController {
         
         // 컨테이너 크기 설정 (2*2 버튼 크기 + 간격 계산)
         let containerWidth = (buttonWidth * 2) + buttonSpacing
-        let containerHeight = (buttonHeight * 2) + buttonSpacing
+        let containerHeight = (buttonHeight * 2) + buttonSpacing + bottomSpacing
         containerView.frame = CGRect(x: 0, y: 0, width: containerWidth, height: containerHeight)
         
         // 기준 객체와 컨테이너의 Y축 오프셋 설정
-        let referenceViewBottomY = slideVar.frame.origin.y + slideVar.frame.height
-        containerView.center = CGPoint(x: view.frame.width / 2, y: referenceViewBottomY + containerHeight / 2 + 30)
+//        let referenceViewBottomY = slideVar.frame.origin.y + slideVar.frame.height
+//        containerView.center = CGPoint(x: view.frame.width / 2, y: referenceViewBottomY + containerHeight / 2 + 30)
         
+        let detailLabel = UILabel()
+        detailLabel.text = "과목을 선택하면 하단에 세부 시간 설정 버튼이 나타납니다!"
+        detailLabel.textColor = UIColor.black
+        detailLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        containerView.addSubview(detailLabel)
         
         // 컨테이너를 화면에 추가
         view.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false //auto layout 적용
+        containerView.topAnchor.constraint(equalTo: slideVar.topAnchor, constant: 90).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 40).isActive = true
     }
     
     private func createSubTimeButton() {
         let subjectTitles: [String] = ["독서", "문학", "선택"]
         
-        // 버튼 크기와 간격 설정
-        let timeButtonWidth: CGFloat = 90
-        let timeButtonHeight: CGFloat = 90
         let timeButtonSpacing: CGFloat = 100
         
         for (index, subtitle) in subjectTitles.enumerated() {
-            var subjectTimePickerButton = SubjectTimePicker(frame: CGRect(x: 55 + Int(timeButtonSpacing) * index, y: 687, width: 90, height: 90), subjectTitle: subtitle)
+            let subjectTimePickerButton = SubjectTimePicker(frame: CGRect(x: 55 + Int(timeButtonSpacing) * index, y: 687, width: 90, height: 90), subjectTitle: subtitle)
             view.addSubview(subjectTimePickerButton)
         }
        
+        //각 과목별로 다르게
+        //부모 컨테이너에 넣어서 적절한 위치에 뜨도록 설정
         
     }
 
