@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.axis = .vertical
         containerView.spacing = 10
-        containerView.distribution = .fillEqually
+        containerView.distribution = .fillProportionally
         
         // 버튼 추가
         for (index, title) in titles.enumerated() {
@@ -85,20 +85,27 @@ class ViewController: UIViewController {
             label.text = "과목을 선택한 후 세부 시간을 설정하세요!"
             label.font = UIFont.systemFont(ofSize: 12, weight: .light)
             label.textColor = UIColor.black
+            label.textAlignment = .center
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
         
         containerView.addArrangedSubview(stackView1)
         containerView.addArrangedSubview(stackView2)
-        containerView.addArrangedSubview(subLabel)        
+        containerView.addArrangedSubview(subLabel)
+
+         
+        
+        stackView2.heightAnchor.constraint(equalTo: stackView1.heightAnchor, multiplier: 1.0).isActive = true;
+        subLabel.heightAnchor.constraint(equalTo: stackView1.heightAnchor, multiplier: 0.4).isActive = true
+        
         view.addSubview(containerView)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 50),
+            containerView.topAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 45),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            containerView.bottomAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 260)
+            containerView.bottomAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 270)
 
         ])
         
