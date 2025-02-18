@@ -27,18 +27,24 @@ class ViewController: UIViewController {
     
     private func createButtonsInGrid(with titles: [String], subtitles: [String], colors: [UIColor]) {
         // 부모 컨테이너 뷰 생성
-        let containerView = UIView()
+        let containerView = UIStackView()
+        let stackView1 = UIStackView()
+        let stackView2 = UIStackView()
         
-        // 버튼 크기와 간격 설정
-        let buttonWidth: CGFloat = 150
-        let buttonHeight: CGFloat = 90
-        let buttonSpacing: CGFloat = 10
-        let bottomSpacing: CGFloat = 10;
+        [stackView1, stackView2].forEach { stack in
+            stack.axis = .horizontal
+            stack.spacing = 10
+            stack.distribution = .fillEqually
+        }
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.axis = .vertical
+        containerView.spacing = 10
+        containerView.distribution = .fillEqually
         
         // 버튼 추가
         for (index, title) in titles.enumerated() {
             let row = index / 2
-            let column = index % 2
             
             // 버튼 생성
             var config = UIButton.Configuration.filled()
@@ -57,44 +63,34 @@ class ViewController: UIViewController {
             config.attributedSubtitle = AttributedString(title, attributes: subtitleContainer)
             
             let button = UIButton(configuration: config)
+            
+            button.translatesAutoresizingMaskIntoConstraints = false
            
-            //button.configuration?.title = title
             button.configuration?.baseBackgroundColor = colors[index]
             button.layer.cornerRadius = 10
             button.layer.masksToBounds = true
             
-            // 버튼 위치 설정 (컨테이너 내부에서의 위치)
-            let xPosition = CGFloat(column) * (buttonWidth + buttonSpacing)
-            let yPosition = CGFloat(row) * (buttonHeight + buttonSpacing)
-            button.frame = CGRect(x: xPosition, y: yPosition, width: buttonWidth, height: buttonHeight)
-            
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             
-            // 버튼을 부모 뷰에 추가
-            containerView.addSubview(button)
+            if (row == 0) {
+                stackView1.addArrangedSubview(button)
+            }
+            else {
+                stackView2.addArrangedSubview(button)
+            }
         }
         
-        // 컨테이너 크기 설정 (2*2 버튼 크기 + 간격 계산)
-        let containerWidth = (buttonWidth * 2) + buttonSpacing
-        let containerHeight = (buttonHeight * 2) + buttonSpacing + bottomSpacing
-        containerView.frame = CGRect(x: 0, y: 0, width: containerWidth, height: containerHeight)
-        
-        // 기준 객체와 컨테이너의 Y축 오프셋 설정
-//        let referenceViewBottomY = slideVar.frame.origin.y + slideVar.frame.height
-//        containerView.center = CGPoint(x: view.frame.width / 2, y: referenceViewBottomY + containerHeight / 2 + 30)
-        
-        let detailLabel = UILabel()
-        detailLabel.text = "과목을 선택하면 하단에 세부 시간 설정 버튼이 나타납니다!"
-        detailLabel.textColor = UIColor.black
-        detailLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        containerView.addSubview(detailLabel)
-        
-        // 컨테이너를 화면에 추가
+        containerView.addArrangedSubview(stackView1)
+        containerView.addArrangedSubview(stackView2)
         view.addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false //auto layout 적용
-        containerView.topAnchor.constraint(equalTo: slideVar.topAnchor, constant: 90).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 40).isActive = true
+        
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 50),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            containerView.bottomAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 230)
+
+        ])
     }
     
     private func createSubTimeButton() {
