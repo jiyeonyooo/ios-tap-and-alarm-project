@@ -114,7 +114,9 @@ class SubjectTimePicker: UIView  {
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        if let viewController = UIApplication.shared.windows.first?.rootViewController {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first,
+           let viewController = window.rootViewController {
             viewController.present(alertController, animated: true, completion: nil)
         }
     }

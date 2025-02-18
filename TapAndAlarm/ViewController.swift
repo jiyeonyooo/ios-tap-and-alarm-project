@@ -80,17 +80,29 @@ class ViewController: UIViewController {
             }
         }
         
+        let subLabel: UILabel = {
+            let label = UILabel()
+            label.text = "과목을 선택한 후 세부 시간을 설정하세요!"
+            label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+            label.textColor = UIColor.black
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
         containerView.addArrangedSubview(stackView1)
         containerView.addArrangedSubview(stackView2)
+        containerView.addArrangedSubview(subLabel)        
         view.addSubview(containerView)
         
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 50),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            containerView.bottomAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 230)
+            containerView.bottomAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 260)
 
         ])
+        
+        
     }
     
     private func createSubTimeButton() {
