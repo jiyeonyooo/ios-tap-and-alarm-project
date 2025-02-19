@@ -112,19 +112,32 @@ class ViewController: UIViewController {
         
     }
     
-    private func createSubTimeButton() {
-        let subjectTitles: [String] = ["독서", "문학", "선택"]
+    private func createSubTimeButton(subtitle: String) {
+        
+        let containerView = UIStackView()
+        let stackView1 = UIStackView()
+        var subjectCategories: [String] = []
+
+        if (subtitle == "국어") {
+            subjectCategories = ["독서", "문학", "선택"]
+        } else if (subtitle == "수학") {
+            subjectCategories = ["공통", "선택"]
+        } else if (subtitle == "영어") {
+            subjectCategories = ["듣기", "나머지"]
+        } else if (subtitle == "탐구") {
+            subjectCategories = ["한국사", "탐구1", "탐구2"]
+        }
+        
+        print(subjectCategories)
         
         let timeButtonSpacing: CGFloat = 100
         
-        for (index, subtitle) in subjectTitles.enumerated() {
-            let subjectTimePickerButton = SubjectTimePicker(frame: CGRect(x: 55 + Int(timeButtonSpacing) * index, y: 687, width: 90, height: 90), subjectTitle: subtitle)
-            view.addSubview(subjectTimePickerButton)
+        for (index, subtitle) in subjectCategories.enumerated() {
+            let subjectTimePickerButton = SubjectTimePicker(subjectTitle: subtitle)
+            subjectTimePickerButton.translatesAutoresizingMaskIntoConstraints = false;
+            containerView.addArrangedSubview(subjectTimePickerButton)
         }
-       
-        //각 과목별로 다르게
-        //부모 컨테이너에 넣어서 적절한 위치에 뜨도록 설정
-        
+               
     }
 
         
@@ -135,7 +148,7 @@ class ViewController: UIViewController {
         subjectTitle.text = "\(title) \(subtitle)영역"
         print("\(title) 버튼이 눌렸습니다!")
         
-        createSubTimeButton()
+        createSubTimeButton(subtitle: subtitle)
         
     }
 

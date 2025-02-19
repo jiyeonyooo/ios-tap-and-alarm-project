@@ -10,6 +10,7 @@ import UIKit
 
 class SubjectTimePicker: UIView  {
     
+    private let stackView = UIStackView()
     private var subjectTitle: String
     
     private let titleContainerView: UIView = {
@@ -41,25 +42,21 @@ class SubjectTimePicker: UIView  {
     }()
     
 
-    override init(frame: CGRect) {
-        self.subjectTitle = ""      //기본값
-        super.init(frame: frame)
-        setupView()
-    }
     
-    convenience init(frame: CGRect, subjectTitle: String) {
-        self.init(frame: frame)     //기존 init 호출
+    
+    init(subjectTitle: String) {
         self.subjectTitle = subjectTitle
-        setupView()
+        super.init(frame: .zero)
+        setupView(subjectTitle: subjectTitle)
     }
-    
+        
     required init?(coder: NSCoder) {
-        self.subjectTitle = ""      //기본값
+        self.subjectTitle = ""
         super.init(coder: coder)
-        setupView()
+        setupView(subjectTitle: subjectTitle)
     }
     
-    private func setupView() {
+    private func setupView(subjectTitle: String) {
         
         titleLabel.text = subjectTitle
         
