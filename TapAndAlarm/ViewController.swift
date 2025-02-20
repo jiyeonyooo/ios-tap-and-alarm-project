@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
 
@@ -20,12 +21,32 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        caculateDday()
         let titles: [String] = ["국어", "수학", "영어", "탐구"]
         let subtitles: [String] = ["<1교시>", "<2교시>", "<3교시>", "<4교시>"]
         let colors: [UIColor] = [UIColor.green1, UIColor.green2, UIColor.green3, UIColor.green4]
         createButtonsInGrid(with: titles, subtitles: subtitles, colors: colors)
         
+    }
+
+    private func caculateDday() {
+        let nowDate = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR") // 한국 기준
+        
+        var daysLeft: Int = 0
+
+        if let targetDate = dateFormatter.date(from: "2025-11-13") {
+
+        daysLeft = Calendar.current.dateComponents([.day], from: nowDate, to: targetDate).day ?? 0
+            print("D-\(daysLeft)")
+        } else {
+            print("날짜 변환에 실패했습니다.")
+        }
+        
+        dDay.text = "\(daysLeft)"
     }
     
     private func createButtonsInGrid(with titles: [String], subtitles: [String], colors: [UIColor]) {
@@ -130,7 +151,7 @@ class ViewController: UIViewController {
         } else if (subtitle == "수학") {
             subjectCategories = ["공통", "선택"]
         } else if (subtitle == "영어") {
-            subjectCategories = ["듣기", "나머지"]
+            subjectCategories = ["듣기", "읽기"]
         } else if (subtitle == "탐구") {
             subjectCategories = ["한국사", "탐구1", "탐구2"]
         }
@@ -147,10 +168,10 @@ class ViewController: UIViewController {
         view.addSubview(subjectTimeButton)
         
         NSLayoutConstraint.activate([
-            subjectTimeButton.topAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 45),
+            subjectTimeButton.topAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 20),
             subjectTimeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             subjectTimeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            subjectTimeButton.bottomAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 150)
+            subjectTimeButton.bottomAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 130)
 
         ])
                
