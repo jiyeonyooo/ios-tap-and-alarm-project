@@ -13,7 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var subjectTitle: UILabel!    //과목 선택 title
     
     @IBOutlet weak var slideVar: UIStackView!
+    
     private var buttons: [UIButton] = [] //과목 선택 버튼
+    private var subjectButton: UIStackView!
+    private var subjectTimeButton = UIStackView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,7 @@ class ViewController: UIViewController {
     
     private func createButtonsInGrid(with titles: [String], subtitles: [String], colors: [UIColor]) {
         // 부모 컨테이너 뷰 생성
-        let containerView = UIStackView()
+        subjectButton = UIStackView()
         let stackView1 = UIStackView()
         let stackView2 = UIStackView()
         
@@ -37,10 +40,11 @@ class ViewController: UIViewController {
             stack.distribution = .fillEqually
         }
         
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.axis = .vertical
-        containerView.spacing = 10
-        containerView.distribution = .fillProportionally
+        subjectButton.translatesAutoresizingMaskIntoConstraints = false
+        subjectButton.axis = .vertical
+        subjectButton.spacing = 10
+        subjectButton.distribution = .fillProportionally
+        
         
         // 버튼 추가
         for (index, title) in titles.enumerated() {
@@ -90,32 +94,35 @@ class ViewController: UIViewController {
             return label
         }()
         
-        containerView.addArrangedSubview(stackView1)
-        containerView.addArrangedSubview(stackView2)
-        containerView.addArrangedSubview(subLabel)
+        subjectButton.addArrangedSubview(stackView1)
+        subjectButton.addArrangedSubview(stackView2)
+        subjectButton.addArrangedSubview(subLabel)
 
          
         
         stackView2.heightAnchor.constraint(equalTo: stackView1.heightAnchor, multiplier: 1.0).isActive = true;
         subLabel.heightAnchor.constraint(equalTo: stackView1.heightAnchor, multiplier: 0.4).isActive = true
         
-        view.addSubview(containerView)
+        view.addSubview(subjectButton)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 45),
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            containerView.bottomAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 270)
+            subjectButton.topAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 45),
+            subjectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            subjectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            subjectButton.bottomAnchor.constraint(equalTo: slideVar.bottomAnchor, constant: 270)
 
         ])
-        
         
     }
     
     private func createSubTimeButton(subtitle: String) {
         
-        let containerView = UIStackView()
-        let stackView1 = UIStackView()
+        subjectTimeButton.axis = .horizontal
+        subjectTimeButton.spacing = 10
+        subjectTimeButton.distribution = .fillEqually
+        subjectTimeButton.alignment = .fill
+        subjectTimeButton.translatesAutoresizingMaskIntoConstraints = false
+
         var subjectCategories: [String] = []
 
         if (subtitle == "국어") {
@@ -130,16 +137,31 @@ class ViewController: UIViewController {
         
         print(subjectCategories)
         
-        let timeButtonSpacing: CGFloat = 100
         
-        for (index, subtitle) in subjectCategories.enumerated() {
+        for (_, subtitle) in subjectCategories.enumerated() {
             let subjectTimePickerButton = SubjectTimePicker(subjectTitle: subtitle)
             subjectTimePickerButton.translatesAutoresizingMaskIntoConstraints = false;
-            containerView.addArrangedSubview(subjectTimePickerButton)
+            subjectTimeButton.addArrangedSubview(subjectTimePickerButton)
         }
+        
+        view.addSubview(subjectTimeButton)
+        
+        NSLayoutConstraint.activate([
+            subjectTimeButton.topAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 45),
+            subjectTimeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            subjectTimeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            subjectTimeButton.bottomAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 150)
+
+        ])
                
     }
-
+    
+    private func removeExistingSubTimeButtons() {
+        for subview in subjectTimeButton.arrangedSubviews {
+            subjectTimeButton.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
+    }
         
     @objc private func buttonTapped(_ sender: UIButton) {
         // 버튼이 눌렸을 때 동작
@@ -147,6 +169,10 @@ class ViewController: UIViewController {
         guard let subtitle = sender.configuration?.subtitle else { return }
         subjectTitle.text = "\(title) \(subtitle)영역"
         print("\(title) 버튼이 눌렸습니다!")
+        
+        if (subjectTimeButton.arrangedSubviews.contains { $0 is SubjectTimePicker }) {
+            removeExistingSubTimeButtons()
+        }
         
         createSubTimeButton(subtitle: subtitle)
         

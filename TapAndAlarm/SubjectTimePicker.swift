@@ -42,8 +42,6 @@ class SubjectTimePicker: UIView  {
     }()
     
 
-    
-    
     init(subjectTitle: String) {
         self.subjectTitle = subjectTitle
         super.init(frame: .zero)
