@@ -10,6 +10,7 @@ import UIKit
 
 class SubjectTimePicker: UIView, TimePickerDelegate  {
     
+    
     private let stackView = UIStackView()
     private var subjectTitle: String
     
@@ -66,9 +67,6 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
         addSubview(titleContainerView)
         titleContainerView.addSubview(titleLabel)
         addSubview(timeButton)
-        //addSubview(pickerContainerView)
-        //pickerContainerView.addSubview(pickerView)
-        
         
         timeButton.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
         
@@ -100,21 +98,23 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
     
     @objc private func timeButtonTapped() {
         guard let windowScene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
-                  let viewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
-                return
-            }
+            let viewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
+            return
+        }
   
-            
-            let timePickerVC = TimePickerViewController()
-            timePickerVC.delegate = self
-            timePickerVC.modalPresentationStyle = .overCurrentContext
-            timePickerVC.modalTransitionStyle = .crossDissolve
+        let timePickerVC = TimePickerViewController()
+        timePickerVC.delegate = self
+        timePickerVC.modalPresentationStyle = .overCurrentContext
+        timePickerVC.modalTransitionStyle = .crossDissolve
 
-            viewController.present(timePickerVC, animated: true)
-        }
+        viewController.present(timePickerVC, animated: true)
+    }
 
-        // TimePickerDelegate 메서드
-        func timePickerDidSelect(minutes: Int) {
-            timeButton.setTitle("\(minutes)분", for: .normal)
-        }
+    func timePickerDidSelect(minutes: Int) {
+        timeButton.setTitle("\(minutes)분", for: .normal)
+    }
+    
+    func loadSubjectName() -> String? {
+        return titleLabel.text ?? "홍길동"
+    }
 }
