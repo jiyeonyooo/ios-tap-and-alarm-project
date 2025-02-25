@@ -10,9 +10,9 @@ import Foundation
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var dDay: UILabel!            //수능 디데이 체크
-    @IBOutlet weak var subjectTitle: UILabel!    //과목 선택 title
-    
+    @IBOutlet weak var dDay: UILabel!               //수능 디데이 체크
+    @IBOutlet weak var subjectTitle: UILabel!       //과목 선택 title
+    @IBOutlet weak var universityPick: UILabel!     //목표 대학 선택
     @IBOutlet weak var slideVar: UIStackView!
     
     private var buttons: [UIButton] = [] //과목 선택 버튼

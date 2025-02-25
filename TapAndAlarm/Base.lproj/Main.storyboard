@@ -98,6 +98,7 @@
                         <outlet property="dDay" destination="3NQ-mb-2Zf" id="r07-PN-EQe"/>
                         <outlet property="slideVar" destination="3PH-Fl-dJn" id="qgX-8p-vu5"/>
                         <outlet property="subjectTitle" destination="RsI-gT-n2b" id="vO8-Xb-6lH"/>
+                        <outlet property="universityPick" destination="aly-3o-fID" id="af6-Kc-Uqb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
