@@ -40,7 +40,6 @@ class TimePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.axis = .vertical
-        containerView.spacing = 10
         containerView.distribution = .fillProportionally
         
         if let subjectName = delegate?.loadSubjectName() {
@@ -83,20 +82,20 @@ class TimePickerViewController: UIViewController, UIPickerViewDelegate, UIPicker
         view.addSubview(containerView)
 
         NSLayoutConstraint.activate([
-            subjectTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            subjectTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             
-            subLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            subLabel.topAnchor.constraint(equalTo: subjectTitle.bottomAnchor, constant: 0),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             
-            pickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pickerView.topAnchor.constraint(equalTo: subLabel.bottomAnchor, constant: 100),
-            pickerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            subjectTitle.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            subLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            pickerView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+
+            pickerView.heightAnchor.constraint(equalToConstant: 400),
             
-            buttonStack.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: 20),
-            buttonStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            buttonStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            buttonStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
+            buttonStack.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            buttonStack.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
         ])
     }
     
