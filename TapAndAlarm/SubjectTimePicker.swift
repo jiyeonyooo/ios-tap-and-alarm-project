@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SubjectTimePicker: UIView  {
+class SubjectTimePicker: UIView, TimePickerDelegate  {
     
     private let stackView = UIStackView()
     private var subjectTitle: String
@@ -31,7 +31,7 @@ class SubjectTimePicker: UIView  {
         return label
     }()
     
-   
+    
     private let timeButton: UIButton = {
         let button = UIButton()
         button.setTitle("35분", for: .normal)
@@ -41,33 +41,12 @@ class SubjectTimePicker: UIView  {
         return button
     }()
     
-    private let pickerContainerView: UIView = {
-        let container = UIView()
-        container.backgroundColor = UIColor.white
-        container.layer.cornerRadius = 10
-        container.layer.shadowColor = UIColor.black.cgColor
-        container.layer.shadowOpacity = 0.3
-        container.layer.shadowRadius = 5
-        container.isHidden = true
-        return container
-    }()
-    
-    private let pickerView: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.datePickerMode = .countDownTimer
-        picker.minuteInterval = 1
-        picker.preferredDatePickerStyle = .wheels
-        picker.isHidden = true
-        return picker
-    }()
-    
-
     init(subjectTitle: String) {
         self.subjectTitle = subjectTitle
         super.init(frame: .zero)
         setupView(subjectTitle: subjectTitle)
     }
-        
+    
     required init?(coder: NSCoder) {
         self.subjectTitle = ""
         super.init(coder: coder)
@@ -89,17 +68,14 @@ class SubjectTimePicker: UIView  {
         addSubview(timeButton)
         //addSubview(pickerContainerView)
         //pickerContainerView.addSubview(pickerView)
-
+        
         
         timeButton.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
-        //pickerView.addTarget(self, action: #selector(timeSelected), for: .valueChanged)
         
         // AutoLayout 설정
         titleContainerView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         timeButton.translatesAutoresizingMaskIntoConstraints = false
-        pickerContainerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             // titleContainerView 위치 및 크기
@@ -119,73 +95,26 @@ class SubjectTimePicker: UIView  {
             timeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             timeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-//            pickerView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//            pickerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
-            
-//            pickerContainerView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//            pickerContainerView.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 5),
-//            pickerContainerView.widthAnchor.constraint(equalToConstant: 200),
-//            pickerContainerView.heightAnchor.constraint(equalToConstant: 120),
-//            
-//            // PickerView
-//            pickerView.centerXAnchor.constraint(equalTo: pickerContainerView.centerXAnchor),
-//            pickerView.centerYAnchor.constraint(equalTo: pickerContainerView.centerYAnchor)
         ])
     }
     
-//    @objc private func timeButtonTapped() {
-//        
-//        let alertController = UIAlertController(title: "시간 선택", message: nil, preferredStyle: .actionSheet)
-//        
-//        let times = ["10분", "20분", "30분", "35분", "40분"]
-//        for time in times {
-//            let action = UIAlertAction(title: time, style: .default) { _ in
-//                self.timeButton.setTitle(time, for: .normal)
-//            }
-//            alertController.addAction(action)
-//        }
-//        
-//        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-//        alertController.addAction(cancelAction)
-//        
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//           let window = windowScene.windows.first,
-//           let viewController = window.rootViewController {
-//            viewController.present(alertController, animated: true, completion: nil)
-//        }
-//    }
-    
     @objc private func timeButtonTapped() {
-        let alertController = UIAlertController(title: "시간 선택", message: "\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
+        guard let windowScene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+                  let viewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
+                return
+            }
+  
             
-        let pickerView = UIDatePicker()
-        pickerView.datePickerMode = .countDownTimer
-        pickerView.minuteInterval = 1
-        pickerView.preferredDatePickerStyle = .wheels
-        pickerView.frame = CGRect(x: 10, y: 40, width:alertController.view.bounds.width - 40, height: 150)
+            let timePickerVC = TimePickerViewController()
+            timePickerVC.delegate = self
+            timePickerVC.modalPresentationStyle = .overCurrentContext
+            timePickerVC.modalTransitionStyle = .crossDissolve
 
-        alertController.view.addSubview(pickerView)
-            
-        let confirmAction = UIAlertAction(title: "선택", style: .default) { _ in
-        let minutes = Int(pickerView.countDownDuration / 60)
-            self.timeButton.setTitle("\(minutes)분", for: .normal)
+            viewController.present(timePickerVC, animated: true)
         }
-            
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
-        alertController.addAction(confirmAction)
-        alertController.addAction(cancelAction)
-
-        if let viewController = UIApplication.shared.keyWindow?.rootViewController {
-            viewController.present(alertController, animated: true, completion: nil)
+        // TimePickerDelegate 메서드
+        func timePickerDidSelect(minutes: Int) {
+            timeButton.setTitle("\(minutes)분", for: .normal)
         }
-    }
-        
-    @objc private func timeSelected() {
-        print("시간 선택")
-        let minutes = Int(pickerView.countDownDuration / 60)
-        timeButton.setTitle("\(minutes)분", for: .normal)
-        pickerContainerView.isHidden = true
-        
-    }
 }

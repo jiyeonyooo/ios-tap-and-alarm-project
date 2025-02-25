@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9051A3A2D6D8480002DD0D1 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9051A392D6D8480002DD0D1 /* TimePickerViewController.swift */; };
 		A922A4562D421E8B002BB4AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A922A4552D421E8B002BB4AC /* AppDelegate.swift */; };
 		A922A4582D421E8B002BB4AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A922A4572D421E8B002BB4AC /* SceneDelegate.swift */; };
 		A922A45A2D421E8B002BB4AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A922A4592D421E8B002BB4AC /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A9051A392D6D8480002DD0D1 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		A922A4522D421E8B002BB4AC /* TapAndAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapAndAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A922A4552D421E8B002BB4AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A922A4572D421E8B002BB4AC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				A922A4572D421E8B002BB4AC /* SceneDelegate.swift */,
 				A922A4592D421E8B002BB4AC /* ViewController.swift */,
 				A922A4692D4A1063002BB4AC /* SubjectTimePicker.swift */,
+				A9051A392D6D8480002DD0D1 /* TimePickerViewController.swift */,
 				A922A45B2D421E8B002BB4AC /* Main.storyboard */,
 				A922A45E2D421E8D002BB4AC /* Assets.xcassets */,
 				A922A4602D421E8D002BB4AC /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				A922A45A2D421E8B002BB4AC /* ViewController.swift in Sources */,
 				A922A4562D421E8B002BB4AC /* AppDelegate.swift in Sources */,
 				A922A4582D421E8B002BB4AC /* SceneDelegate.swift in Sources */,
+				A9051A3A2D6D8480002DD0D1 /* TimePickerViewController.swift in Sources */,
 				A922A46A2D4A1063002BB4AC /* SubjectTimePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
