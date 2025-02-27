@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var universityPick: UILabel!     //목표 대학 선택
     @IBOutlet weak var totalTimeLabel: UILabel!     //전체 남은 시간
     @IBOutlet weak var slideVar: UIStackView!
+    @IBOutlet weak var slider: UISlider!
     
     private var buttons: [UIButton] = [] //과목 선택 버튼
     private var subjectButton: UIStackView!
@@ -35,6 +36,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         caculateDday()
+        slider.setThumbImage(UIImage(), for: .normal)
+        slider.setThumbImage(UIImage(), for: .highlighted)
+        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+
+        
         let titles: [String] = ["국어", "수학", "영어", "탐구"]
         let subtitles: [String] = ["<1교시>", "<2교시>", "<3교시>", "<4교시>"]
         let colors: [UIColor] = [UIColor.green1, UIColor.green2, UIColor.green3, UIColor.green4]
@@ -194,7 +200,7 @@ class ViewController: UIViewController {
             subjectTimeButton.topAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 20),
             subjectTimeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             subjectTimeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            subjectTimeButton.bottomAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 130)
+            subjectTimeButton.bottomAnchor.constraint(equalTo: subjectButton.bottomAnchor, constant: 120)
 
         ])
                
@@ -232,6 +238,16 @@ class ViewController: UIViewController {
         
         createSubTimeButton(subtitle: subtitle)
         
+    }
+    
+    @objc func sliderValueChanged(_ sender: UISlider) {
+        if sender.value > 0.7 {
+            sender.minimumTrackTintColor = .blue
+        } else if sender.value > 0.3 {
+            sender.minimumTrackTintColor = .green
+        } else {
+            sender.minimumTrackTintColor = .red
+        }
     }
 
 }

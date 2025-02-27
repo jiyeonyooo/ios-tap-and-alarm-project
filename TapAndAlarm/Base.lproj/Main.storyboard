@@ -18,19 +18,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="과목을 선택해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-gT-n2b">
-                                <rect key="frame" x="30" y="163.66666666666666" width="333" height="28.666666666666657"/>
+                                <rect key="frame" x="30" y="134.33333333333334" width="333" height="28.666666666666657"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0분 0초" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CZ-q9-BoM">
-                                <rect key="frame" x="97.333333333333329" y="212.33333333333334" width="198.33333333333337" height="71.666666666666657"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="60"/>
+                                <rect key="frame" x="105.66666666666669" y="183" width="182" height="65.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="55"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3PH-Fl-dJn">
-                                <rect key="frame" x="30" y="319" width="333" height="30"/>
+                                <rect key="frame" x="30" y="278.66666666666669" width="333" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔔" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lqu-Yi-1NQ">
                                         <rect key="frame" x="0.0" y="0.0" width="22.666666666666668" height="30"/>
@@ -69,12 +69,6 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="목표 대학을 설정해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aly-3o-fID">
-                                <rect key="frame" x="136.33333333333334" y="124.33333333333333" width="120.66666666666666" height="14.333333333333329"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -83,23 +77,21 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RsI-gT-n2b" secondAttribute="trailing" constant="30" id="5ie-wf-Q4Y"/>
                             <constraint firstItem="3CZ-q9-BoM" firstAttribute="top" secondItem="RsI-gT-n2b" secondAttribute="bottom" constant="20" id="80p-nw-GnX"/>
                             <constraint firstItem="3CZ-q9-BoM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N3n-MR-dlF"/>
+                            <constraint firstItem="RsI-gT-n2b" firstAttribute="top" secondItem="uPD-yI-jzc" secondAttribute="bottom" constant="30" id="Nef-uE-S48"/>
                             <constraint firstItem="uPD-yI-jzc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RCh-Mk-swB"/>
-                            <constraint firstItem="aly-3o-fID" firstAttribute="top" secondItem="uPD-yI-jzc" secondAttribute="bottom" constant="20" id="SmM-at-CDu"/>
                             <constraint firstItem="3PH-Fl-dJn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="bbx-Qo-70c"/>
-                            <constraint firstItem="3PH-Fl-dJn" firstAttribute="top" secondItem="3CZ-q9-BoM" secondAttribute="bottom" constant="35" id="fcR-QG-xKn"/>
+                            <constraint firstItem="3PH-Fl-dJn" firstAttribute="top" secondItem="3CZ-q9-BoM" secondAttribute="bottom" constant="30" id="fcR-QG-xKn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3PH-Fl-dJn" secondAttribute="trailing" constant="30" id="iT7-cp-2dV"/>
-                            <constraint firstItem="RsI-gT-n2b" firstAttribute="top" secondItem="aly-3o-fID" secondAttribute="bottom" constant="25" id="jGU-Pg-NGn"/>
                             <constraint firstItem="uPD-yI-jzc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="mo6-6j-NzU"/>
                             <constraint firstItem="3PH-Fl-dJn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sIU-ds-yVS"/>
-                            <constraint firstItem="aly-3o-fID" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wds-8n-Pzr"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dDay" destination="3NQ-mb-2Zf" id="r07-PN-EQe"/>
                         <outlet property="slideVar" destination="3PH-Fl-dJn" id="qgX-8p-vu5"/>
+                        <outlet property="slider" destination="f2O-f5-2Xv" id="nQH-I4-clP"/>
                         <outlet property="subjectTitle" destination="RsI-gT-n2b" id="vO8-Xb-6lH"/>
                         <outlet property="totalTimeLabel" destination="3CZ-q9-BoM" id="UBN-LH-i1j"/>
-                        <outlet property="universityPick" destination="aly-3o-fID" id="af6-Kc-Uqb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

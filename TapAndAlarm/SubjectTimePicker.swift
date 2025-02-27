@@ -37,9 +37,9 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
     
     var timeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("35분", for: .normal)
+        button.setTitle("", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.layer.cornerRadius = 8
         return button
     }()
