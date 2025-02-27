@@ -160,10 +160,10 @@ class ViewController: UIViewController {
 
         if (subtitle == "국어") {
             totalTime = 80
-            subjectCategories = ["독서", "문학", "선택"]
+            subjectCategories = ["독서", "문학", "언매/화작"]
         } else if (subtitle == "수학") {
             totalTime = 100
-            subjectCategories = ["공통", "선택"]
+            subjectCategories = ["공통", "기하/미적/확통"]
         } else if (subtitle == "영어") {
             totalTime = 70
             subjectCategories = ["듣기", "읽기"]

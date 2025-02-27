@@ -47,6 +47,30 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
     init(subjectTitle: String) {
         self.subjectTitle = subjectTitle
         self.preTime = 0
+        if (subjectTitle == "문학") {
+            timeButton.setTitle("25분", for: .normal)
+        }
+        else if (subjectTitle == "독서") {
+            timeButton.setTitle("35분", for: .normal)
+        }
+        else if (subjectTitle == "언매/화작") {
+            timeButton.setTitle("20분", for: .normal)
+        }
+        else if (subjectTitle == "공통") {
+            timeButton.setTitle("60분", for: .normal)
+        }
+        else if (subjectTitle == "기하/미적/확통") {
+            timeButton.setTitle("40분", for: .normal)
+        }
+        else if (subjectTitle == "듣기") {
+            timeButton.setTitle("25분", for: .normal)
+        } 
+        else if (subjectTitle == "읽기") {
+            timeButton.setTitle("45분", for: .normal)
+        }
+        else {
+            timeButton.setTitle("30분", for: .normal)
+        }
         super.init(frame: .zero)
         setupView(subjectTitle: subjectTitle)
     }
@@ -54,6 +78,30 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
     required init?(coder: NSCoder) {
         self.subjectTitle = ""
         self.preTime = 0
+        if (subjectTitle == "문학") {
+            timeButton.setTitle("25분", for: .normal)
+        }
+        else if (subjectTitle == "독서") {
+            timeButton.setTitle("35분", for: .normal)
+        }
+        else if (subjectTitle == "언매/화작") {
+            timeButton.setTitle("20분", for: .normal)
+        }
+        else if (subjectTitle == "공통") {
+            timeButton.setTitle("60분", for: .normal)
+        }
+        else if (subjectTitle == "기하/미적/확통") {
+            timeButton.setTitle("40분", for: .normal)
+        }
+        else if (subjectTitle == "듣기") {
+            timeButton.setTitle("25분", for: .normal)
+        }
+        else if (subjectTitle == "읽기") {
+            timeButton.setTitle("45분", for: .normal)
+        }
+        else {
+            timeButton.setTitle("30분", for: .normal)
+        }
         super.init(coder: coder)
         setupView(subjectTitle: subjectTitle)
     }
