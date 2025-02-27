@@ -5,6 +5,17 @@
 //  Created by 유지연 on 1/23/25.
 //
 
+/*
+ 구현해야 하는 것: 과목 바뀔 때 마다 totalTime 초기화
+ 시간 설정하면 title도 바뀌도록
+ 시작 버튼 생성 -> 혹시 과목별 시간과 안맞으면 "그대로 진행하시겠습니까?" 알람창
+ 일시 정지 버튼 / 리셋 버튼
+ 
+*/
+
+
+
+
 import UIKit
 import Foundation
 
@@ -18,6 +29,7 @@ class ViewController: UIViewController {
     private var buttons: [UIButton] = [] //과목 선택 버튼
     private var subjectButton: UIStackView!
     private var subjectTimeButton = UIStackView()
+    var totalTime: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,12 +159,16 @@ class ViewController: UIViewController {
         var subjectCategories: [String] = []
 
         if (subtitle == "국어") {
+            totalTime = 80
             subjectCategories = ["독서", "문학", "선택"]
         } else if (subtitle == "수학") {
+            totalTime = 100
             subjectCategories = ["공통", "선택"]
         } else if (subtitle == "영어") {
+            totalTime = 70
             subjectCategories = ["듣기", "읽기"]
         } else if (subtitle == "탐구") {
+            totalTime = 90
             subjectCategories = ["한국사", "탐구1", "탐구2"]
         }
         
@@ -163,6 +179,12 @@ class ViewController: UIViewController {
             let subjectTimePickerButton = SubjectTimePicker(subjectTitle: subtitle)
             subjectTimePickerButton.translatesAutoresizingMaskIntoConstraints = false;
             subjectTimeButton.addArrangedSubview(subjectTimePickerButton)
+            
+            subjectTimePickerButton.timeButtonTappedClosure = { selectedTime in
+                print("타이머가 설정되었습니다: \(selectedTime)분")
+                self.totalTime += selectedTime
+                print("전체 시간: \(self.totalTime)")
+            }
         }
         
         view.addSubview(subjectTimeButton)
@@ -185,7 +207,7 @@ class ViewController: UIViewController {
     }
         
     @objc private func buttonTapped(_ sender: UIButton) {
-        // 버튼이 눌렸을 때 동작
+    
         guard let title = sender.configuration?.title else { return }
         guard let subtitle = sender.configuration?.subtitle else { return }
         subjectTitle.text = "\(title) \(subtitle)영역"
@@ -193,6 +215,15 @@ class ViewController: UIViewController {
         
         if (subjectTimeButton.arrangedSubviews.contains { $0 is SubjectTimePicker }) {
             removeExistingSubTimeButtons()
+            if (subtitle == "국어") {
+                totalTime = 80
+            } else if (subtitle == "수학") {
+                totalTime = 100
+            } else if (subtitle == "영어") {
+                totalTime = 70
+            } else if (subtitle == "탐구") {
+                totalTime = 90
+            }
         }
         
         createSubTimeButton(subtitle: subtitle)

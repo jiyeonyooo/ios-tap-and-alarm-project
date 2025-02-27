@@ -13,6 +13,8 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
     
     private let stackView = UIStackView()
     private var subjectTitle: String
+    private var preTime: Int
+    var timeButtonTappedClosure: ((Int) -> Void)?
     
     private let titleContainerView: UIView = {
         let view = UIView()
@@ -33,7 +35,7 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
     }()
     
     
-    private let timeButton: UIButton = {
+    var timeButton: UIButton = {
         let button = UIButton()
         button.setTitle("35분", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
@@ -44,14 +46,24 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
     
     init(subjectTitle: String) {
         self.subjectTitle = subjectTitle
+        self.preTime = 0
         super.init(frame: .zero)
         setupView(subjectTitle: subjectTitle)
     }
     
     required init?(coder: NSCoder) {
         self.subjectTitle = ""
+        self.preTime = 0
         super.init(coder: coder)
         setupView(subjectTitle: subjectTitle)
+    }
+
+    
+    func getTimeValue() -> Int? {
+        if let timeText = timeButton.title(for: .normal), let timeValue = Int(timeText) {
+            return timeValue
+        }
+        return nil
     }
     
     private func setupView(subjectTitle: String) {
@@ -101,6 +113,11 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
             let viewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
             return
         }
+        
+        if let timeText = timeButton.title(for: .normal),
+           let extractedTime = Int(timeText.filter { $0.isNumber }) {
+            preTime = extractedTime
+        }
   
         let timePickerVC = TimePickerViewController()
         timePickerVC.delegate = self
@@ -109,12 +126,16 @@ class SubjectTimePicker: UIView, TimePickerDelegate  {
 
         viewController.present(timePickerVC, animated: true)
     }
+    
 
     func timePickerDidSelect(minutes: Int) {
         timeButton.setTitle("\(minutes)분", for: .normal)
+        timeButtonTappedClosure?(minutes-preTime)
+        
     }
     
     func loadSubjectName() -> String? {
         return titleLabel.text ?? "홍길동"
     }
+
 }
